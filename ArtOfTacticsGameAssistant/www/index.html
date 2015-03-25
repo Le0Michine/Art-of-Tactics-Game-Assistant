@@ -1,40 +1,106 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <!--<link rel="stylesheet" type="text/css" href="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />-->
+        <link rel="stylesheet" type="text/css" href="lib/jquery-mobile-flat-ui-theme/jquery.mobile.flatui.css" />
+        <script type="text/javascript" src="lib/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+        
+        <title>Art Of Tactic</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
+        <script>
+            var count = [];
+            var totalCount = 0;
+            var costs = [];
+            costs['unit1'] = 35;
+            costs['unit2'] = 10;
+            costs['unit3'] = 12;
+            costs['unit4'] = 15;
+            function initCounter(counterId) {
+                if(count[counterId] === undefined) {
+                    count[counterId] = 0;
+                }
+            }
+            function clickminus(counterId) 
+            {
+                initCounter(counterId);
+                if(count[counterId] > 0) {
+                    document.getElementById(counterId).innerHTML = --count[counterId];
+                    totalCount -= costs[counterId];
+                    $( '#totalCount' ).text(totalCount);
+                }
+            }
+            function clickplus(counterId) 
+            {
+                initCounter(counterId);
+                document.getElementById(counterId).innerHTML = ++count[counterId];
+                totalCount += costs[counterId];
+                $( '#totalCount' ).text(totalCount);
+            }
+        </script>
+        
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider" data-theme="a">Список юнитов</li>
+            <li>
+                <div style="float:left">
+                    <span style="font-weight:bold">Штаб</span><br/>
+                    <span style="font-style:italic; font-family:Arial">35</span>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="float:right;">
+                    <button data-icon="flat-plus" data-theme="b" data-iconpos="notext" onclick="clickplus('unit1')">add</button>
+                    <button data-role="button" disabled="disabled" id="unit1">0</button>
+                    <button data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" onclick="clickminus('unit1')">del</button>
+                </div>
+            </li>
+            <li>
+                <div style="float:left">
+                    <span style="font-weight:bold">Стрелковая рота</span><br/>
+                    <span style="font-style:italic; font-family:Arial">10</span>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="float:right;">
+                    <button data-icon="flat-plus" data-theme="b" data-iconpos="notext" onclick="clickplus('unit2')">add</button>
+                    <button data-role="button" disabled="disabled" id="unit2">0</button>
+                    <button data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" onclick="clickminus('unit2')">del</button>
+                </div>
+            </li>
+            <li>
+                <div style="float:left">
+                    <span style="font-weight:bold">Пулементный взвод</span><br/>
+                    <span style="font-style:italic; font-family:Arial">12</span>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="float:right;">
+                    <button data-icon="flat-plus" data-theme="b" data-iconpos="notext" onclick="clickplus('unit3')">add</button>
+                    <button data-role="button" disabled="disabled" id="unit3">0</button>
+                    <button data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" onclick="clickminus('unit3')">del</button>
+                </div>
+            </li>
+            <li>
+                <div style="float:left">
+                    <span style="font-weight:bold">Батарея 82-мм минометов</span><br/>
+                    <span style="font-style:italic; font-family:Arial">15</span>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="float:right;">
+                    <button data-icon="flat-plus" data-theme="b" data-iconpos="notext" onclick="clickplus('unit4')">add</button>
+                    <button data-role="button" disabled="disabled" id="unit4">0</button>
+                    <button data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" onclick="clickminus('unit4')">del</button>
+                </div>
+            </li>
+            <li data-role="list-divider" data-theme="f">
+                <div style="float:left">
+                    <span>Суммарная стоимость:</span>
+                </div>
+                <div style="float:right">
+                    <span style="font-style:bold; font-family:Arial" id="totalCount">0</span>
+                </div>
+            </li>
+        </ul>
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
